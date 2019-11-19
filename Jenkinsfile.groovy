@@ -40,6 +40,9 @@ node {
 		checkout scm
 		sh "ls -lh"
     }
+	ansiColor('xterm') {
+            printlnGreen "ttexttt"
+    }
     // stage ("workdir") {
     //     def workDir = sh(returnStdout: true, script: "pwd").trim()
     //     sh "cd $workDir && cd testtesttest && ls -lh"
@@ -52,3 +55,8 @@ node {
         archiveArtifacts artifacts: "**/target/*.jar", fingerprint: true
     } 
 }
+
+def printlnGreen(text) {
+    println "\033[1;4;37;42m$text\033[0m"
+}
+
