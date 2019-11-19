@@ -45,7 +45,7 @@ node {
     //     sh "cd $workDir && cd testtesttest && ls -lh"
     // }
     stage ("buildgw") {
-        sh "mvn clean install -f spring-boot-mustang-copy/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/"
+        sh "mvn clean install -f spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/"
     }
     stage ("putfileinJenkins") {
         // def workDir = sh(returnStdout: true, script: "pwd").trim()
