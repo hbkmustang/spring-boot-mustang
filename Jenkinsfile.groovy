@@ -36,6 +36,7 @@ node {
         //    sh " git clone https://$Username:$Password@github.com/hbkmustang/spring-boot-mustang-copy"
         //    // sh " git clone https://$Username:$Password@github.com/hbkmustang/testtesttest"
         //    }
+		sh "ls -lh"
 		checkout scm
 		sh "ls -lh"
     }
