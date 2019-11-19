@@ -23,11 +23,11 @@ node () {
         sh"uptime"
         deleteDir()
     }
-    stage () {
-        sshagent(['uuuuuuuuuuuuu']) {
-            sh "git clone -b master git@github.com:/tests.git ."
-        }
-    }   
+    // stage () {
+    //    sshagent(['uuuuuuuuuuuuu']) {
+    //        sh "git clone -b master git@github.com:/tests.git ."
+    //    }
+    // }   
     input("Please approved deploy to...")
 }
 node {
