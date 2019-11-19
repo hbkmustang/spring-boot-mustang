@@ -34,7 +34,7 @@ properties([
 ])
 
 node () {
-	currentBuild.displayName = "#${BUILD_NUMBER} text1 ${BRANCH}"
+	currentBuild.displayName = "#${BUILD_NUMBER} text1 ${params.BRANCH}"
 	ansiColor('xterm') {
         printlnGreen "ttexttt"
     }
