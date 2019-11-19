@@ -1,7 +1,21 @@
-// properties([pipelineTriggers([cron('*/5 * * * *')])])
-
 properties([
-pipelineTriggers([])
+    pipelineTriggers([
+        GenericTrigger(
+            causeString: 'Push to master', 
+            genericVariables: [[
+                defaultValue: '',
+                key: 'ref', 
+                regexpFilter: '', 
+                value: '$.ref'
+            ]], 
+            printContributedVariables: true, 
+            printPostContent: true, 
+            regexpFilterExpression: 'master$', 
+            regexpFilterText: '$ref', 
+            silentResponse: true, 
+            token: '71B6B68DFC8C34235B642BE12346ifjgk'
+        )
+    ])
 ])
 
 node () {
