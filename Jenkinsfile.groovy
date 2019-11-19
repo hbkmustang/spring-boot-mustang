@@ -19,6 +19,10 @@ properties([
 ])
 
 node () {
+	ansiColor('xterm') {
+        printlnGreen "ttexttt"
+    }
+
     stage ("average") {
         sh"uptime"
         deleteDir()
@@ -30,6 +34,7 @@ node () {
     // }   
     // input("Please approved deploy to...")
 }
+
 node {
     stage ("gitclone") {
         // withCredentials([usernamePassword(credentialsId: '6c7686a5-6762-426c-968e-1758974df0f9', passwordVariable: 'Password', usernameVariable: 'Username')]) {
@@ -39,9 +44,6 @@ node {
 		sh "ls -lh"
 		checkout scm
 		sh "ls -lh"
-    }
-	ansiColor('xterm') {
-            printlnGreen "ttexttt"
     }
     // stage ("workdir") {
     //     def workDir = sh(returnStdout: true, script: "pwd").trim()
