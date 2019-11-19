@@ -19,6 +19,7 @@ properties([
 ])
 
 node () {
+	currentBuild.displayName = "#${BUILD_NUMBER} text1"
 	ansiColor('xterm') {
         printlnGreen "ttexttt"
     }
