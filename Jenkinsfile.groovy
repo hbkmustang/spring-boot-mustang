@@ -28,7 +28,7 @@ node () {
     //        sh "git clone -b master git@github.com:/tests.git ."
     //    }
     // }   
-    input("Please approved deploy to...")
+    // input("Please approved deploy to...")
 }
 node {
     stage ("gitclone") {
