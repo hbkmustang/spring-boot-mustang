@@ -37,6 +37,7 @@ node {
         //    // sh " git clone https://$Username:$Password@github.com/hbkmustang/testtesttest"
         //    }
 		checkout scm
+		sh "ls -lh"
     }
     // stage ("workdir") {
     //     def workDir = sh(returnStdout: true, script: "pwd").trim()
