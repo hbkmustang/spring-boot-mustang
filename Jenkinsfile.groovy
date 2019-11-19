@@ -32,10 +32,11 @@ node () {
 }
 node {
     stage ("gitclone") {
-        withCredentials([usernamePassword(credentialsId: '6c7686a5-6762-426c-968e-1758974df0f9', passwordVariable: 'Password', usernameVariable: 'Username')]) {
-            sh " git clone https://$Username:$Password@github.com/hbkmustang/spring-boot-mustang-copy"
-            // sh " git clone https://$Username:$Password@github.com/hbkmustang/testtesttest"
-            }
+        // withCredentials([usernamePassword(credentialsId: '6c7686a5-6762-426c-968e-1758974df0f9', passwordVariable: 'Password', usernameVariable: 'Username')]) {
+        //    sh " git clone https://$Username:$Password@github.com/hbkmustang/spring-boot-mustang-copy"
+        //    // sh " git clone https://$Username:$Password@github.com/hbkmustang/testtesttest"
+        //    }
+		checkout scm
     }
     // stage ("workdir") {
     //     def workDir = sh(returnStdout: true, script: "pwd").trim()
