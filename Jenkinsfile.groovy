@@ -1,6 +1,7 @@
 node {
     stage ("CHECKOUT") {
         sh "pwd"
+        sh "rm -rf spring-boot-mustang/"
         // withCredentials([usernamePassword(credentialsId: '6c7686a5-6762-426c-968e-1758974df0f9', passwordVariable: 'Password', usernameVariable: 'Username')]) {
         sh " git clone https://github.com/hbkmustang/spring-boot-mustang"
         //    }
