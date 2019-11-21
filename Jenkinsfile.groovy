@@ -13,5 +13,6 @@ node {
     stage ("putfileinJenkins") {
         // def workDir = sh(returnStdout: true, script: "pwd").trim()
         archiveArtifacts artifacts: "**/target/*.jar", fingerprint: true
-    } 
+    }
+	
 }
