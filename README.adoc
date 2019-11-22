@@ -55,7 +55,7 @@ Here is a quick teaser of a complete Spring Boot application in Java:
 
 
 
-== Getting help
+ == Getting help
 Having trouble with Spring Boot? We'd like to help!
 
 * Check the {docs}/html/[reference documentation], especially the
@@ -90,7 +90,7 @@ requests. If you want to raise an issue, please follow the recommendations below
 
 
 
-== Building from Source
+ == Building from Source
 You don't need to build from source to use Spring Boot (binaries in
 https://repo.spring.io[repo.spring.io]), but if you want to try out the latest and
 greatest, Spring Boot can be easily built with the
