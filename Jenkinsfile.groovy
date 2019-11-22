@@ -1,6 +1,34 @@
 properties([
+	buildDiscarder(
+        logRotator(
+            artifactDaysToKeepStr: '14',
+            artifactNumToKeepStr: '5',
+            daysToKeepStr: '14',
+            numToKeepStr: '10'
+        )
+    ),
+    parameters([
+        choice(
+            name: 'BRANCH',
+            choices: 'master\nstable\nrelease',
+            description: 'Choise master, stable, release'
+        )
+    ]),
     pipelineTriggers([
-        issueCommentTrigger('.*test this please.*')
+        GenericTrigger(
+            causeString: 'Push to master', 
+            genericVariables: [[
+                defaultValue: '',
+                key: 'ref', 
+                regexpFilter: '', 
+                value: '$.ref'
+            ]], 
+            printContributedVariables: true, 
+            printPostContent: true, 
+            regexpFilterExpression: 'master$', 
+            regexpFilterText: '$ref', 
+            silentResponse: true, 
+        )
     ])
 ])
 
