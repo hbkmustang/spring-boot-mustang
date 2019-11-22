@@ -1,3 +1,9 @@
+properties([
+    pipelineTriggers([
+        issueCommentTrigger('.*test this please.*')
+    ])
+])
+
 node {
     stage ("CHECKOUT") {
         sh "pwd"
