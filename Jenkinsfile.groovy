@@ -1,7 +1,7 @@
-properties([
-    pipelineTriggers([
-    ])
-])
+//properties([
+//    pipelineTriggers([
+//    ])
+//])
 
 node () {
     stage ("CHECKOUT") {
