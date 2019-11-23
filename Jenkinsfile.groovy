@@ -1,4 +1,4 @@
-//    Generic trigger uncheck after once
+//      Generic trigger uncheck after once
 //properties([
 //    pipelineTriggers([
 //    ])
