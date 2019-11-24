@@ -36,7 +36,7 @@ node () {
             nexusUrl: '127.0.0.1:8081',
             groupId: 'GW',
             // version: '1.0.'+env.BUILD_NUMBER,
-            version: '1.0.101',
+            version: '1.0.9',
             repository: 'spring-repo',
             credentialsId: 'nexus-credentials',
             artifacts: [
