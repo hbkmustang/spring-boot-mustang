@@ -25,7 +25,7 @@ node () {
     }
 
 
-    stage("publish to nexus") {
+    stage ("publish to nexus") {
         nexusArtifactUploader(
             nexusVersion: 'nexus3',
             protocol: 'http',
@@ -42,7 +42,7 @@ node () {
             ]
         )
     }
-    
-    
+
+
 }
 
