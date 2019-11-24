@@ -31,7 +31,7 @@ node () {
             protocol: 'http',
             nexusUrl: '127.0.0.1:8081',
             groupId: 'org.springframework.boot',
-            version: 2.2.1.BUILD-SNAPSHOT,
+            version: '2.2.1.BUILD-SNAPSHOT',
             repository: 'spring-repo',
             credentialsId: 'nexus-credentials',
             artifacts: [
