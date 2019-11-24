@@ -4,7 +4,6 @@
 //    ])
 //])
 
-
 node () {
 
     stage ("CHECKOUT") {
@@ -12,7 +11,6 @@ node () {
         sh "rm -rf spring-boot-mustang/"
         sh "git clone https://github.com/hbkmustang/spring-boot-mustang"
     }
-
 	
     stage ("BUILD") {
         // sh "pwd"
@@ -27,7 +25,6 @@ node () {
     //    // def workDir = sh(returnStdout: true, script: "pwd").trim()
     //   archiveArtifacts artifacts: "**/target/*.jar", fingerprint: true
     // }
-
 
     stage ("publish to nexus") {
         // echo "Version Build: " versionbuild
@@ -48,6 +45,5 @@ node () {
             ]
         )
     }
-
 
 }
