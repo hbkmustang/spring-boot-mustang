@@ -17,13 +17,15 @@ node () {
     stage ("BUILD") {
         sh "pwd"
         sh "mvn clean install -f spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/"
+        sh "cp spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/target/spring-boot-smoke-test-web-ui-2.2.1.BUILD-SNAPSHOT.jar ./spring-project.${env.BUILD_NUMBER}.jar"
+        sh "ls -lh"
     }
 
 
-    stage ("putfileinJenkins") {
-        // def workDir = sh(returnStdout: true, script: "pwd").trim()
-       archiveArtifacts artifacts: "**/target/*.jar", fingerprint: true
-    }
+    // stage ("putfileinJenkins") {
+    //    // def workDir = sh(returnStdout: true, script: "pwd").trim()
+    //   archiveArtifacts artifacts: "**/target/*.jar", fingerprint: true
+    // }
 
 
     stage ("publish to nexus") {
@@ -40,7 +42,7 @@ node () {
                 [artifactId: 'spring-boot-smoke-test-web-ui',
                 classifier: '',
                 // file: 'spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/target/spring-boot-smoke-test-web-ui-2.2.1.BUILD-SNAPSHOT.jar',
-                file: '**/target/*.jar',
+                // file: '**/target/*.jar',
                 type: 'jar']
             ]
         )
