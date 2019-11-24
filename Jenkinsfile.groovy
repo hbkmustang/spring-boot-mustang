@@ -8,9 +8,9 @@
 node () {
 
     stage ("CHECKOUT") {
-        sh "pwd"
+        // sh "pwd"
         sh "rm -rf spring-boot-mustang/"
-        sh " git clone https://github.com/hbkmustang/spring-boot-mustang"
+        sh "git clone https://github.com/hbkmustang/spring-boot-mustang"
     }
 
 	
@@ -43,8 +43,6 @@ node () {
             artifacts: [
                 [artifactId: 'spring-project',
                 classifier: '',
-                // file: 'spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/target/spring-boot-smoke-test-web-ui-2.2.1.BUILD-SNAPSHOT.jar',
-                // file: '**/target/*.jar',
                 file: 'spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/target/spring-boot-smoke-test-web-ui-2.2.1.BUILD-SNAPSHOT.jar',
                 type: 'jar']
             ]
