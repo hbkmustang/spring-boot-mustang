@@ -25,23 +25,23 @@ node () {
     }
 
 
-//    stage ("publish to nexus") {
-//        nexusArtifactUploader(
-//            nexusVersion: 'nexus3',
-//            protocol: 'http',
-//            nexusUrl: '127.0.0.1:8081',
-//            groupId: 'org.springframework.boot',
-//            version: version,
-//            repository: 'RepositoryName',
-//            credentialsId: 'nexus-credentials',
-//            artifacts: [
-//                [artifactId: spring-boot-maven-plugin,
-//                classifier: '',
-//                file: 'spring-boot-maven-plugin' + version + '.jar',
-//                type: 'jar']
-//            ]
-//        )
-//    }
+    stage ("publish to nexus") {
+        nexusArtifactUploader(
+            nexusVersion: 'nexus3',
+            protocol: 'http',
+            nexusUrl: '127.0.0.1:8081',
+            groupId: 'org.springframework.boot',
+            // version: version,
+            repository: 'RepositoryName',
+            credentialsId: 'nexus-credentials',
+            artifacts: [
+                [artifactId: spring-boot-maven-plugin,
+                classifier: '',
+                file: '	spring-boot-smoke-test-web-ui-2.2.1.BUILD-SNAPSHOT.jar',
+                type: 'jar']
+            ]
+        )
+    }
 
 
 }
