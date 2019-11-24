@@ -29,11 +29,11 @@ node () {
         nexusArtifactUploader(
             nexusVersion: 'nexus3',
             protocol: 'http',
-            nexusUrl: '127.0.0.1:8081/repository/',
+            nexusUrl: '127.0.0.1:8081',
             groupId: 'org.springframework.boot',
             version: '2.2.1.BUILD-SNAPSHOT',
             repository: 'spring-repo',
-            credentialsId: 'nexus-credentials',
+            credentialsId: 'nexus-admin',
             artifacts: [
                 [artifactId: spring-boot-smoke-test-web-ui,
                 classifier: '',
