@@ -45,7 +45,7 @@ node () {
                 classifier: '',
                 // file: 'spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/target/spring-boot-smoke-test-web-ui-2.2.1.BUILD-SNAPSHOT.jar',
                 // file: '**/target/*.jar',
-                file: 'spring-project.1.0.$' + {env.BUILD_NUMBER} + '.jar',
+                file: 'spring-project.1.0' + versionbuild + '.jar',
                 type: 'jar']
             ]
         )
