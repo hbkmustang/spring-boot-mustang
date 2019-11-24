@@ -15,7 +15,7 @@ node () {
 	
     stage ("BUILD") {
         sh "pwd"
-        // sh "mvn clean install -f spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/"
+        sh "mvn clean install -f spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/"
     }
 
 
@@ -29,7 +29,7 @@ node () {
         nexusArtifactUploader(
             nexusVersion: 'nexus3',
             protocol: 'http',
-            nexusUrl: '127.0.0.1:8081/repository',
+            nexusUrl: '127.0.0.1:8081/repository/',
             groupId: 'org.springframework.boot',
             version: '2.2.1.BUILD-SNAPSHOT',
             repository: 'spring-repo',
