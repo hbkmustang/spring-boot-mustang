@@ -5,13 +5,11 @@
 //])
 
 node () {
+
     stage ("CHECKOUT") {
         sh "pwd"
         sh "rm -rf spring-boot-mustang/"
-        // withCredentials([usernamePassword(credentialsId: '6c7686a5-6762-426c-968e-1758974df0f9', passwordVariable: 'Password', usernameVariable: 'Username')]) {
         sh " git clone https://github.com/hbkmustang/spring-boot-mustang"
-        //    }
-		// checkout scm
     }
 
 	
@@ -20,12 +18,31 @@ node () {
         sh "mvn clean install -f spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/"
     }
 
-    
+
     stage ("putfileinJenkins") {
         // def workDir = sh(returnStdout: true, script: "pwd").trim()
-        archiveArtifacts artifacts: "**/target/*.jar", fingerprint: true
+       archiveArtifacts artifacts: "**/target/*.jar", fingerprint: true
     }
 
-	
+
+    stage("publish to nexus") {
+        nexusArtifactUploader(
+            nexusVersion: 'nexus3',
+            protocol: 'http',
+            nexusUrl: '127.0.0.1:8081',
+            groupId: 'org.springframework.boot',
+            version: version,
+            repository: 'RepositoryName',
+            credentialsId: 'nexus-credentials',
+            artifacts: [
+                [artifactId: spring-boot-maven-plugin,
+                classifier: '',
+                file: 'spring-boot-maven-plugin' + version + '.jar',
+                type: 'jar']
+            ]
+        )
+    }
+    
+    
 }
 
