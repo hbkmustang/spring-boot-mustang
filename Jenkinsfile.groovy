@@ -31,13 +31,13 @@ node () {
             protocol: 'http',
             nexusUrl: '127.0.0.1:8081',
             groupId: 'org.springframework.boot',
-            // version: version,
-            repository: 'RepositoryName',
+            version: 2.2.1.BUILD-SNAPSHOT,
+            repository: 'spring-repo',
             credentialsId: 'nexus-credentials',
             artifacts: [
-                [artifactId: spring-boot-maven-plugin,
+                [artifactId: spring-boot-smoke-test-web-ui,
                 classifier: '',
-                file: '	spring-boot-smoke-test-web-ui-2.2.1.BUILD-SNAPSHOT.jar',
+                file: '	spring-boot-smoke-test-web-ui-' + version + '.jar',
                 type: 'jar']
             ]
         )
