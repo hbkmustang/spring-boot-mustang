@@ -4,6 +4,7 @@
 //    ])
 //])
 
+
 node () {
 
     stage ("CHECKOUT") {
