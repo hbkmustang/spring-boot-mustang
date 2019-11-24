@@ -27,6 +27,7 @@ node () {
 
 
     stage ("publish to nexus") {
+        sh "pwd"
         nexusArtifactUploader(
             nexusVersion: 'nexus3',
             protocol: 'http',
