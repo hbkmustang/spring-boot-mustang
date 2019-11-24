@@ -18,10 +18,11 @@ node () {
         sh "pwd"
         sh "mvn clean install -f spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/"
         sh "mv spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/target/spring-boot-smoke-test-web-ui-2.2.1.BUILD-SNAPSHOT.jar spring-boot-mustang/spring-project.1.0.${env.BUILD_NUMBER}.jar"
-        sh "ls -lh"
+        sh "ls -lh spring-boot-mustang/"
+        def versionbuild = ${env.BUILD_NUMBER}
+        echo versionbuild
     }
-
-
+    
     // stage ("putfileinJenkins") {
     //    // def workDir = sh(returnStdout: true, script: "pwd").trim()
     //   archiveArtifacts artifacts: "**/target/*.jar", fingerprint: true
@@ -29,6 +30,7 @@ node () {
 
 
     stage ("publish to nexus") {
+        echo versionbuild
         sh "pwd"
         nexusArtifactUploader(
             nexusVersion: 'nexus3',
