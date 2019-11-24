@@ -34,7 +34,7 @@ node () {
             groupId: 'org.springframework.boot',
             version: '2.2.1.BUILD-SNAPSHOT',
             repository: 'spring-repo',
-            credentialsId: 'nexus-admin',
+            credentialsId: 'nexus-credentials-2',
             artifacts: [
                 [artifactId: 'spring-boot-smoke-test-web-ui',
                 classifier: '',
