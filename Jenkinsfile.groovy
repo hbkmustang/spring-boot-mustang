@@ -33,7 +33,7 @@ node () {
             nexusUrl: '127.0.0.1:8081',
             groupId: 'org.springframework.boot',
             version: '2.2.1.BUILD-SNAPSHOT',
-            repository: 'spring-repo',
+            repository: 'spring-repo-2',
             credentialsId: 'nexus-credentials-2',
             artifacts: [
                 [artifactId: 'spring-boot-smoke-test-web-ui',
