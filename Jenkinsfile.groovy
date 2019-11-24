@@ -37,7 +37,7 @@ node () {
             artifacts: [
                 [artifactId: spring-boot-smoke-test-web-ui,
                 classifier: '',
-                file: '	spring-boot-smoke-test-web-ui-' + version + '.jar',
+                file: 'spring-boot-smoke-test-web-ui-' + version + '.jar',
                 type: 'jar']
             ]
         )
