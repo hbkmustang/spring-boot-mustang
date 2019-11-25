@@ -49,14 +49,8 @@ node () {
     }
 
     stage ("CI DEPLOY") {
-       sh "cd /home/ec2-user/GraduationWork"
-       
-       echo ansible different playbooks/roles for creating and setup instances CI and QA
-       sh "sh go.sh"
-
-       sh "cd /home/ec2-user/GraduationWork"       
-       echo 
-       sh "ansible-playbook -i ./hosts deployment/site.yml -e 'port=8080' --vault-password-file deployment/ansible-vault.pass"
+        build 'CI_provisioning_deploy'
+        // build 'CI_provisioning_deploy'
     }
 
 }
