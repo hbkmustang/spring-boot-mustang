@@ -4,8 +4,6 @@
 //     ])
 //])
 
-
-
 node () {
 
     stage ("CHECKOUT") {
@@ -16,24 +14,27 @@ node () {
 	
     stage ("BUILD") {
     
-        withMaven(
-            // Maven installation declared in the Jenkins "Global Tool Configuration"
-            maven: 'maven-3') {
-            // Maven settings.xml file defined with the Jenkins Config File Provider Plugin
-            // We recommend to define Maven settings.xml globally at the folder level using
-            // navigating to the folder configuration in the section "Pipeline Maven Configuration / Override global Maven configuration"
-            // or globally to the entire master navigating to  "Manage Jenkins / Global Tools Configuration"
-            // mavenSettingsConfig: 'my-maven-settings') {
+        // withMaven(
+        //    // Maven installation declared in the Jenkins "Global Tool Configuration"
+        //    maven: 'maven-3') {
+        //    // Maven settings.xml file defined with the Jenkins Config File Provider Plugin
+        //    // We recommend to define Maven settings.xml globally at the folder level using
+        //    // navigating to the folder configuration in the section "Pipeline Maven Configuration / Override global Maven configuration"
+        //    // or globally to the entire master navigating to  "Manage Jenkins / Global Tools Configuration"
+        //    // mavenSettingsConfig: 'my-maven-settings') {
  
-            // Run the maven build
-            sh "mvn clean install -f spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/" 
-            // sh "pwd"
-            // sh "mv spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/target/spring-boot-smoke-test-web-ui-2.2.1.BUILD-SNAPSHOT.jar spring-boot-mustang/spring-project.1.0.${env.BUILD_NUMBER}.jar"
-            // sh "ls -lh spring-boot-mustang/"
-            // def versionbuild = env.BUILD_NUMBER
-            // echo versionbuild
+        //    // Run the maven build
+        //    sh "mvn clean install -f spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/" 
+        //    // sh "pwd"
+        //    // sh "mv spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/target/spring-boot-smoke-test-web-ui-2.2.1.BUILD-SNAPSHOT.jar spring-boot-mustang/spring-project.1.0.${env.BUILD_NUMBER}.jar"
+        //    // sh "ls -lh spring-boot-mustang/"
+        //    // def versionbuild = env.BUILD_NUMBER
+        //    // echo versionbuild
+        
 
-        } 
+        // } 
+        // Run the maven build
+        sh "mvn clean install -f spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/" 
 
     }
     
