@@ -48,7 +48,7 @@ node () {
         nexusArtifactUploader(
             nexusVersion: 'nexus3',
             protocol: 'http',
-            nexusUrl: '127.0.0.1:8081',
+            nexusUrl: '172.17.0.1:8081',
             groupId: 'GW',
             version: '1.0.'+env.BUILD_NUMBER,
             // version: '1.0.9',
