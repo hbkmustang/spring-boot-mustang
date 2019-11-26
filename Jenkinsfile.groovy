@@ -8,6 +8,12 @@
 
 node () {
 
+    tools {
+    
+        maven "mvn2"
+    
+    }
+
     stage ("CHECKOUT") {
         // sh "pwd"
         sh "rm -rf spring-boot-mustang/"
