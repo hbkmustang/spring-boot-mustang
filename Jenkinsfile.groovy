@@ -67,7 +67,7 @@ node () {
     }
 
     stage ("CI DEPLOY") {
-        build 'CI_provisioning_deploy'
+        // build 'CI_provisioning_deploy'
         // build 'CI_provisioning_deploy'
     }
 
