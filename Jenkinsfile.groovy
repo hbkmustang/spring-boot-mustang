@@ -65,8 +65,17 @@ node () {
     }
 
     stage ("CI DEPLOY") {
+        build 'ci-Instance/create'
+        build 'ci-Instance/provision'
+
+        build 'docker-Instance/create'
+        build 'docker-Instance/provision'
+    
         build 'ci-Instance/deploy'
         build 'ci-Instance/deploy_in_docker'
+
+        build 'docker-Instance/image-build-push'
+        build 'docker-Instance/deploy_in_docker_repo'
     }
 
 }
