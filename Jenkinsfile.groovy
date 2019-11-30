@@ -66,9 +66,12 @@ node () {
 
     stage ("CI DEPLOY") {
         // build 'QA_provisioning_deploy'
-        build 'ci-Instance/jobs/create'
-        build 'ci-Instance/jobs/deploy'
-        build 'ci-Instance/jobs/deploy_in_docker'
+        // build '../ci-Instance/jobs/create'
+        sh "echo Try"
+        build '../ci-Instance/jobs/deploy'
+        sh "echo Try"
+        build 'ci-Instance/deploy'
+        // build 'ci-Instance/jobs/deploy_in_docker'
     }
 
 }
