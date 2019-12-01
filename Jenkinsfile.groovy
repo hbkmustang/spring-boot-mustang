@@ -24,6 +24,7 @@ node () {
                       groovyScript {
                           script("return['aaa','bbb']")
                           fallbackScript('return ["error"]')
+                      }
                   }
         }
         echo env.IMAGE_VERSION
