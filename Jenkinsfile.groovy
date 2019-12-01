@@ -16,7 +16,16 @@ node () {
         // build 'docker-Instance/provision'
 
         sh "/usr/local/GraduationWork/select-image/main.sh > /usr/local/GraduationWork/select-image/list-images-versions"
-        build 'Select-Image'
+        // build 'Select-Image'
+        parameters {
+                  activeChoiceParam('choice1') {
+                      description('select your choice')
+                      choiceType('RADIO')
+                      groovyScript {
+                          script("return['aaa','bbb']")
+                          fallbackScript('return ["error"]')
+                  }
+        }
         echo env.IMAGE_VERSION
                 
         // build 'ci-Instance/deploy'
