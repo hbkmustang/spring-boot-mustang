@@ -74,21 +74,24 @@ node () {
 
 }
 
-fileContent = sh (
-    script: '/usr/local/GraduationWork/select-image/main.sh',
-    returnStdout: true
-).trim()
 
-userInput = input(id: 'userInput',    
+node {
+
+    stage ("User choice version for proceed") {
+        fileContent = sh (
+            script: '/usr/local/GraduationWork/select-image/main.sh',
+            returnStdout: true
+        ).trim()
+
+        userInput = input(id: 'userInput',    
                   message: 'Choose version ',    
                   parameters: [
                     [$class:               'ChoiceParameterDefinition', choices: fileContent, name: 'Ver']
                          ]  
-)
+        )
+        echo "User choiced "userInput
+    }
 
-echo "User choiced "userInput
-
-node {
 
     stage ("CI DEPLOY") {
         // build 'ci-Instance/create'
