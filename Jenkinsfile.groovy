@@ -89,7 +89,7 @@ node {
                     [$class:               'ChoiceParameterDefinition', choices: fileContent, name: 'Ver']
                          ]  
         )
-        echo "User choiced "userInput
+        echo 'User choiced '+userInput
     }
 
 
