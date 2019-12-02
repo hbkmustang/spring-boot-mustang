@@ -131,7 +131,7 @@ node {
         
         parallel CI_Branch: {
             stage ("CI_Deploy") {
-                build job:'ci-Instance/Deploy', parameters: [string(name: 'ArtifactVersion', value: userInputArtifact)]
+                build job:'ci-Instance/deploy', parameters: [string(name: 'ArtifactVersion', value: userInputArtifact)]
             }
         }, Docker_Branch: {
             stage ("Docker_Deploy") {
