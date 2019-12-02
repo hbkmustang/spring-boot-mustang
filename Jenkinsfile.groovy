@@ -72,47 +72,51 @@ node () {
 
     }
 
-}
-
-
-
-stage ("User choices version of docker image for deploy to proceed") {
-    fileContent = sh (
-        script: '/usr/local/GraduationWork/select-version/select-artifact-version.sh',
-        returnStdout: true
-    ).trim()
-
-    timeout(time: 300, unit: 'SECONDS') {
-        userInputArtifact = input(id: 'userInput',    
-              message: 'Choose version of artifact for deploy (if timeout - latest will be selected): ',
-              parameters: [
-                  [$class:               'ChoiceParameterDefinition', choices: fileContent, name: 'Version of Artifact']
-                      ]
-        )
+    stage ("User choices version of docker image for deploy to proceed") {
+        fileContent = sh (
+            script: '/usr/local/GraduationWork/select-version/select-artifact-version.sh',
+            returnStdout: true
+        ).trim()
     }
-    echo 'User choiced version of Artifact '+userInputArtifact
-}
 
-stage ("User choices version of Artifact for deploy to proceed") {
-    fileContent = sh (
-        script: '/usr/local/GraduationWork/select-image/main.sh',
-        returnStdout: true
-    ).trim()
-
-    timeout(time: 300, unit: 'SECONDS') {
-        userInputImage = input(id: 'userInput',    
-              message: 'Choose version of image for deploy (if timeout - latest will be selected): ',
-              parameters: [
-                [$class:               'ChoiceParameterDefinition', choices: fileContent, name: 'Version of Image']
-                     ]  
-        )
+    stage ("User choices version of Artifact for deploy to proceed") {
+        fileContent2 = sh (
+            script: '/usr/local/GraduationWork/select-image/main.sh',
+            returnStdout: true
+        ).trim()
     }
-    echo 'User choiced version of Image '+userInputImage
+
 }
+
+
+
+timeout(time: 300, unit: 'SECONDS') {
+   userInputArtifact = input(id: 'userInput',    
+          message: 'Choose version of artifact for deploy (if timeout - latest will be selected): ',
+          parameters: [
+              [$class:               'ChoiceParameterDefinition', choices: fileContent, name: 'Version of Artifact']
+                  ]
+    )
+}
+
+timeout(time: 300, unit: 'SECONDS') {
+    userInputImage = input(id: 'userInput',    
+          message: 'Choose version of image for deploy (if timeout - latest will be selected): ',
+          parameters: [
+            [$class:               'ChoiceParameterDefinition', choices: fileContent2, name: 'Version of Image']
+                 ]  
+    )
+}
+
+    
 
 node {
 
     stage ("CI DEPLOY") {
+    
+        echo 'User choiced version of Artifact '+userInputArtifact
+        echo 'User choiced version of Image '+userInputImage
+        
         // build 'ci-Instance/create'
         // build 'ci-Instance/provision'
 
