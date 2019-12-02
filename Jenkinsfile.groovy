@@ -79,7 +79,7 @@ node () {
 
     stage ("User choices version of Artifact for deploy to proceed") {
         fileContent2 = sh (
-            script: '/usr/local/GraduationWork/select-image/main.sh',
+            script: '/usr/local/GraduationWork/select-version/select-image-version.sh',
             returnStdout: true
         ).trim()
     }
