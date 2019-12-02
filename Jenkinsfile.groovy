@@ -77,21 +77,35 @@ node () {
 
 node {
 
-    stage ("User choice version for proceed") {
+    stage ("User choices version of docker image for deploy to proceed") {
+        fileContent = sh (
+            script: '/usr/local/GraduationWork/select-version/select-artifact-version.sh',
+            returnStdout: true
+        ).trim()
+
+        userInputArtifact = input(id: 'userInput',    
+                  message: 'Choose version of artifact for deploy (if timeout - latest will be selected): ',
+                  parameters: [
+                    [$class:               'ChoiceParameterDefinition', choices: fileContent, name: 'Version of Artifact']
+                         ]  
+        )
+        echo 'User choiced version of Artifact '+userInputArtifact
+    }
+
+    stage ("User choices version of Artifact for deploy to proceed") {
         fileContent = sh (
             script: '/usr/local/GraduationWork/select-image/main.sh',
             returnStdout: true
         ).trim()
 
-        userInput = input(id: 'userInput',    
-                  message: 'Choose version ',    
+        userInputImage = input(id: 'userInput',    
+                  message: 'Choose version of image for deploy (if timeout - latest will be selected): ',
                   parameters: [
-                    [$class:               'ChoiceParameterDefinition', choices: fileContent, name: 'Ver']
+                    [$class:               'ChoiceParameterDefinition', choices: fileContent, name: 'Version of Image']
                          ]  
         )
-        echo 'User choiced '+userInput
+        echo 'User choiced version of Image '+userInputImage
     }
-
 
     stage ("CI DEPLOY") {
         // build 'ci-Instance/create'
