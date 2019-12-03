@@ -23,6 +23,7 @@ pipeline {
             groovyScript {
                 script('filecontent')
                 fallbackScript('"fallback choice"')
+            }
         }
         activeChoiceParam('Image_Version') {
             description('Allows user choose Image version')
@@ -31,6 +32,7 @@ pipeline {
             groovyScript {
                 script('filecontent2')
                 fallbackScript('"fallback choice"')
+            }
         }
     }
 
