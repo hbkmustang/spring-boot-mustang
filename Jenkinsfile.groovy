@@ -1,17 +1,10 @@
-//      Generic trigger uncheck after once
-//properties([
-//    pipelineTriggers([
-//     ])
-//])
-
-
-
 node () {
 
     stage ("CHECKOUT") {
         // sh "pwd"
         sh "rm -rf spring-boot-mustang/"
-        sh "git clone https://github.com/hbkmustang/spring-boot-mustang"
+        // sh "git clone https://github.com/hbkmustang/spring-boot-mustang"
+        checkout scm
     }
 	
     stage ("BUILD") {
@@ -90,7 +83,7 @@ node () {
 
 
 
-timeout(time: 300, unit: 'SECONDS') {
+timeout(time: 90, unit: 'SECONDS') {
    userInputArtifact = input(id: 'userInput',    
           message: 'Choose version of artifact for deploy (if timeout - latest will be selected): ',
           parameters: [
@@ -99,7 +92,7 @@ timeout(time: 300, unit: 'SECONDS') {
     )
 }
 
-timeout(time: 300, unit: 'SECONDS') {
+timeout(time: 90, unit: 'SECONDS') {
     userInputImage = input(id: 'userInput',    
           message: 'Choose version of image for deploy (if timeout - latest will be selected): ',
           parameters: [
