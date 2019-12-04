@@ -9,7 +9,7 @@ properties([
             randomName: 'choice-parameter-21337077649621572', 
             script: [
                 $class: 'GroovyScript', 
-                fallbackScript: 'return['error']', 
+                fallbackScript: '', 
                 script: '''def command = "/usr/local/GraduationWork/select-version/select-artifact-version.sh"
                          def process = command.execute ( )
                          process.waitFor() 
