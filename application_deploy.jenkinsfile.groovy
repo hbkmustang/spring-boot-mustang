@@ -1,42 +1,67 @@
+properties([
+    parameters([
+        [
+            $class: 'ChoiceParameter', 
+            choiceType: 'PT_SINGLE_SELECT', 
+            description: '', 
+            filterable: false, 
+            name: 'Artifact_Version', 
+            randomName: 'choice-parameter-21337077649621572', 
+            script: [
+                $class: 'GroovyScript', 
+                fallbackScript: '', 
+                script: '''String readFileString(String filePath) {
+                    File file = new File(filePath)
+                    String fileContent = file.text
+                    return fileContent
+                    }
+                '''
+            ]
+        ]
+    ])
+])
+
 pipeline {
     agent any
-    stage ("Find all artifact and image versions") {
-        steps {
-            fileContent = sh (
-                script: '/usr/local/GraduationWork/select-version/select-artifact-version.sh',
-                returnStdout: true
-            ).trim()
-        }
-        steps {
-            fileContent2 = sh (
-                script: '/usr/local/GraduationWork/select-version/select-image-version.sh',
-                returnStdout: true
-            ).trim()
-        }
-    }
+//    stages {
+//        stage ("Find all artifact and image versions") {
+//            steps {
+//                fileContent = sh (
+//                    script: '/usr/local/GraduationWork/select-version/select-artifact-version.sh',
+//                    returnStdout: true
+//                ).trim()
+//            }
+//            steps {
+//                fileContent2 = sh (
+//                    script: '/usr/local/GraduationWork/select-version/select-image-version.sh',
+//                    returnStdout: true
+//                ).trim()
+//           }
+//        }
+//    }
+//
+//    parameters {
+//        activeChoiceParam('Artifact_Version') {
+//            description('Allows user choose Artifact version')
+//            filterable()
+//            choiceType('SINGLE_SELECT')
+//            groovyScript {
+//                script('filecontent')
+//                fallbackScript('"fallback choice"')
+//            }
+//        }
+//        activeChoiceParam('Image_Version') {
+//            description('Allows user choose Image version')
+//            filterable()
+//            choiceType('SINGLE_SELECT')
+//            groovyScript {
+//                script('filecontent2')
+//                fallbackScript('"fallback choice"')
+//            }
+//        }
+//    }
 
-    parameters {
-        activeChoiceParam('Artifact_Version') {
-            description('Allows user choose Artifact version')
-            filterable()
-            choiceType('SINGLE_SELECT')
-            groovyScript {
-                script('filecontent')
-                fallbackScript('"fallback choice"')
-            }
-        }
-        activeChoiceParam('Image_Version') {
-            description('Allows user choose Image version')
-            filterable()
-            choiceType('SINGLE_SELECT')
-            groovyScript {
-                script('filecontent2')
-                fallbackScript('"fallback choice"')
-            }
-        }
-    }
-
-    stage ("") {
+    stage ("ENVIRONMENT VARS") {
         echo "${env.Artifact_Version}"
         echo "${env.Image_Version}"
     }
