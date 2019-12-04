@@ -9,12 +9,14 @@ properties([
             randomName: 'choice-parameter-21337077649621572', 
             script: [
                 $class: 'GroovyScript', 
-                fallbackScript: '', 
-                script: 'def sout = new StringBuilder(), serr = new StringBuilder()
-                           def proc = "/usr/local/GraduationWork/select-version/select-artifact-version.sh".execute()
-                           proc.consumeProcessOutput(sout, serr)
-                           proc.waitForOrKill(1000)
-                           println "out> $sout err> $serr"'
+                fallbackScript: 'return['error']', 
+                script: 'def command = "/usr/local/GraduationWork/select-version/select-artifact-version.sh"
+                         def process = command.execute ( )
+                         process.waitFor() 
+                         def var_arim = [ ]
+                         var_arim = "${process.in.text}" .eachLine { line ->
+                         var_arim << line
+}'
             ]
         ]
     ])
