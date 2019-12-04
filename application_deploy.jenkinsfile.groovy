@@ -10,13 +10,13 @@ properties([
             script: [
                 $class: 'GroovyScript', 
                 fallbackScript: 'return['error']', 
-                script: 'def command = "/usr/local/GraduationWork/select-version/select-artifact-version.sh"
+                script: '''def command = "/usr/local/GraduationWork/select-version/select-artifact-version.sh"
                          def process = command.execute ( )
                          process.waitFor() 
                          def var_arim = [ ]
                          var_arim = "${process.in.text}" .eachLine { line ->
                          var_arim << line
-}'
+}'''
             ]
         ]
     ])
