@@ -1,30 +1,39 @@
-properties([
-    parameters([
-        [
-            $class: 'ChoiceParameter', 
-            choiceType: 'PT_SINGLE_SELECT', 
-            description: '', 
-            filterable: false, 
-            name: 'Artifact_Version', 
-            randomName: 'choice-parameter-21337077649621572', 
-            script: [
-                $class: 'GroovyScript', 
-                fallbackScript: '', 
-                script: '''def command = "/usr/local/GraduationWork/select-version/select-artifact-version.sh"
-                         def process = command.execute ( )
-                         process.waitFor() 
-                         def var_arim = [ ]
-                         var_arim = "${process.in.text}" .eachLine { line ->
-                         var_arim << line
-}'''
-            ]
-        ]
-    ])
-])
+// properties([
+//    parameters([
+//        [
+//            $class: 'ChoiceParameter', 
+//            choiceType: 'PT_SINGLE_SELECT', 
+//            description: '', 
+//            filterable: false, 
+//            name: 'Artifact_Version', 
+//            randomName: 'choice-parameter-21337077649621572', 
+//            script: [
+//                $class: 'GroovyScript', 
+//                fallbackScript: '', 
+//                script: '''def command = "/usr/local/GraduationWork/select-version/select-artifact-version.sh"
+//                         def process = command.execute ( )
+//                         process.waitFor() 
+//                         def var_arim = [ ]
+//                         var_arim = "${process.in.text}" .eachLine { line ->
+//                         var_arim << line
+//}'''
+//            ]
+//        ]
+//    ])
+//])
 
 pipeline {
     agent any
+    parameters {
+        choice(
+            name: 'Versions',
+            choices:"3.4\n4.4",
+            description: "Build for which version?" )
+    }        
+    
     stages {
+
+
 //        stage ("Find all artifact and image versions") {
 //            steps {
 //                fileContent = sh (
