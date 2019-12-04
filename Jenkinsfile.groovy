@@ -1,5 +1,3 @@
-
-
 node () {
 
     stage ("CHECKOUT") {
