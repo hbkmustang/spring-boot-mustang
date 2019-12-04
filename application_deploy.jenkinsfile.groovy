@@ -10,12 +10,7 @@ properties([
             script: [
                 $class: 'GroovyScript', 
                 fallbackScript: '', 
-                script: ''' fileContent = sh (
-                    script: "/usr/local/GraduationWork/select-version/select-artifact-version.sh",
-                    returnStdout: true
-                    ).trim()
-                    }
-                '''
+                script: '''println "/usr/local/GraduationWork/select-version/select-artifact-version.sh".execute().text'''
             ]
         ]
     ])
