@@ -124,15 +124,15 @@ node {
 
         // build 'docker-Instance/deploy_in_docker_repo'
         
-        parallel CI_Branch: {
-            stage ("CI_Deploy") {
-                build job:'ci-Instance/deploy', parameters: [string(name: 'ArtifactVersion', value: userInputArtifact)]
-            }
-        }, Docker_Branch: {
-            stage ("Docker_Deploy") {
-                build job: 'docker-Instance/deploy_in_docker_repo', parameters: [string(name: 'ImageVersion', value: userInputImage)]
-            }
-        }, failFast: true
+//        parallel CI_Branch: {
+//            stage ("CI_Deploy") {
+//                build job:'ci-Instance/deploy', parameters: [string(name: 'ArtifactVersion', value: userInputArtifact)]
+//            }
+//        }, Docker_Branch: {
+//            stage ("Docker_Deploy") {
+//                build job: 'docker-Instance/deploy_in_docker_repo', parameters: [string(name: 'ImageVersion', value: userInputImage)]
+//            }
+//        }, failFast: true
     }
 
 }
