@@ -67,74 +67,74 @@ node () {
 
     }
 
-    stage ("User choices version of docker image for deploy to proceed") {
-        fileContent = sh (
-            script: '/usr/local/GraduationWork/select-version/select-artifact-version.sh',
-            returnStdout: true
-        ).trim()
-    }
-
-    stage ("User choices version of Artifact for deploy to proceed") {
-        fileContent2 = sh (
-            script: '/usr/local/GraduationWork/select-version/select-image-version.sh',
-            returnStdout: true
-        ).trim()
-    }
-
+//    stage ("User choices version of docker image for deploy to proceed") {
+//        fileContent = sh (
+//            script: '/usr/local/GraduationWork/select-version/select-artifact-version.sh',
+//            returnStdout: true
+//        ).trim()
+//    }
+//
+//    stage ("User choices version of Artifact for deploy to proceed") {
+//        fileContent2 = sh (
+//            script: '/usr/local/GraduationWork/select-version/select-image-version.sh',
+//            returnStdout: true
+//        ).trim()
+//    }
+//
 }
-
-
-
-timeout(time: 90, unit: 'SECONDS') {
-   userInputArtifact = input(id: 'userInput',    
-          message: 'Choose version of artifact for deploy (if timeout - latest will be selected): ',
-          parameters: [
-              [$class:               'ChoiceParameterDefinition', choices: fileContent, name: 'Version of Artifact']
-                  ]
-    )
-}
-
-timeout(time: 90, unit: 'SECONDS') {
-    userInputImage = input(id: 'userInput',    
-          message: 'Choose version of image for deploy (if timeout - latest will be selected): ',
-          parameters: [
-            [$class:               'ChoiceParameterDefinition', choices: fileContent2, name: 'Version of Image']
-                 ]  
-    )
-}
-
-    
-
-node {
-
-    stage ("CI DEPLOY") {
-    
-        echo 'User choiced version of Artifact '+userInputArtifact
-        echo 'User choiced version of Image '+userInputImage
-        
-        // build 'ci-Instance/create'
-        // build 'ci-Instance/provision'
-
-        // build 'docker-Instance/create'
-        // build 'docker-Instance/provision'
-
-        // build 'ci-Instance/deploy'
-        // build 'ci-Instance/deploy_in_docker'
-
-        // build 'qa-Instance/deploy'
-        // build 'qa-Instance/deploy_in_docker'
-
-        // build 'docker-Instance/deploy_in_docker_repo'
-        
-//        parallel CI_Branch: {
-//            stage ("CI_Deploy") {
-//                build job:'ci-Instance/deploy', parameters: [string(name: 'ArtifactVersion', value: userInputArtifact)]
-//            }
-//        }, Docker_Branch: {
-//            stage ("Docker_Deploy") {
-//                build job: 'docker-Instance/deploy_in_docker_repo', parameters: [string(name: 'ImageVersion', value: userInputImage)]
-//            }
-//        }, failFast: true
-    }
-
-}
+//
+//
+//
+//timeout(time: 90, unit: 'SECONDS') {
+//   userInputArtifact = input(id: 'userInput',    
+//          message: 'Choose version of artifact for deploy (if timeout - latest will be selected): ',
+//          parameters: [
+//              [$class:               'ChoiceParameterDefinition', choices: fileContent, name: 'Version of Artifact']
+//                  ]
+//    )
+//}
+//
+//timeout(time: 90, unit: 'SECONDS') {
+//    userInputImage = input(id: 'userInput',    
+//          message: 'Choose version of image for deploy (if timeout - latest will be selected): ',
+//          parameters: [
+//            [$class:               'ChoiceParameterDefinition', choices: fileContent2, name: 'Version of Image']
+//                 ]  
+//    )
+//}
+//
+//    
+//
+//node {
+//
+//    stage ("CI DEPLOY") {
+//    
+//        echo 'User choiced version of Artifact '+userInputArtifact
+//        echo 'User choiced version of Image '+userInputImage
+//        
+//        // build 'ci-Instance/create'
+//        // build 'ci-Instance/provision'
+//
+//        // build 'docker-Instance/create'
+//        // build 'docker-Instance/provision'
+//
+//        // build 'ci-Instance/deploy'
+//        // build 'ci-Instance/deploy_in_docker'
+//
+//        // build 'qa-Instance/deploy'
+//        // build 'qa-Instance/deploy_in_docker'
+//
+//        // build 'docker-Instance/deploy_in_docker_repo'
+//        
+////        parallel CI_Branch: {
+////            stage ("CI_Deploy") {
+////                build job:'ci-Instance/deploy', parameters: [string(name: 'ArtifactVersion', value: userInputArtifact)]
+////            }
+////        }, Docker_Branch: {
+////            stage ("Docker_Deploy") {
+////                build job: 'docker-Instance/deploy_in_docker_repo', parameters: [string(name: 'ImageVersion', value: userInputImage)]
+////            }
+////        }, failFast: true
+//    }
+//
+// }
