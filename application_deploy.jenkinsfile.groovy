@@ -10,10 +10,10 @@ properties([
             script: [
                 $class: 'GroovyScript', 
                 fallbackScript: '', 
-                script: '''String readFileString(String filePath) {
-                    File file = new File(filePath)
-                    String fileContent = file.text
-                    return fileContent
+                script: ''' fileContent = sh (
+                    script: "/usr/local/GraduationWork/select-version/select-artifact-version.sh",
+                    returnStdout: true
+                    ).trim()
                     }
                 '''
             ]
@@ -23,7 +23,7 @@ properties([
 
 pipeline {
     agent any
-//    stages {
+    stages {
 //        stage ("Find all artifact and image versions") {
 //            steps {
 //                fileContent = sh (
@@ -86,6 +86,6 @@ pipeline {
 //                build job: 'docker-Instance/deploy_in_docker_repo', parameters: [string(name: 'ImageVersion', value: userInputImage)]
 //            }
 //        }, failFast: true
-//    }
+    }
 
 }
