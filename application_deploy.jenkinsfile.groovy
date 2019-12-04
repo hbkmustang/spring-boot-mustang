@@ -24,12 +24,30 @@
 
 pipeline {
     agent any
-    parameters {
-        choice(
-            name: 'Versions',
-            choices:"3.4\n4.4",
-            description: "Build for which version?" )
-    }        
+//    parameters {
+//        choice(
+//            name: 'Versions',
+//            choices:"3.4\n4.4",
+//            description: "Build for which version?" )
+//        activechoice(
+//            name: 'Versions_2',
+//            choices:"3.4\n4.4",
+//            description: "Build for which version 2?" )
+//    }        
+properties([parameters([[$class: 'ChoiceParameter', choiceType: 'PT_SINGLE_SELECT', description: 'PLEASE, SELECT YOUR VERSION OF ARTIFACT FOR DEPLOY.', filterLength: 1, filterable: false, name: 'Artifact_Version', randomName: 'choice-parameter-535167446217461', script: [$class: 'GroovyScript', fallbackScript: [classpath: [], sandbox: false, script: 'return[\'error\']'], script: [classpath: [], sandbox: false, script: '''def command = "/usr/local/GraduationWork/select-version/select-artifact-version.sh"
+def process = command.execute ( )
+process.waitFor() 
+def var_arim = [ ]
+var_arim = "${process.in.text}" .eachLine { line ->
+    var_arim << line
+}''']]], [$class: 'ChoiceParameter', choiceType: 'PT_SINGLE_SELECT', description: 'PLEASE, SELECT YOUR VERSION OF IMAGE DOCKER FOR DEPLOY.', filterLength: 1, filterable: false, name: 'Image_Version', randomName: 'choice-parameter-535167449001810', script: [$class: 'GroovyScript', fallbackScript: [classpath: [], sandbox: false, script: 'return[\'error\']'], script: [classpath: [], sandbox: false, script: '''def command = "/usr/local/GraduationWork/select-version/select-image-version.sh"
+def process = command.execute ( )
+process.waitFor() 
+def var_arim = [ ]
+var_arim= "${process.in.text}" .eachLine { line ->
+    var_arim << line
+}''']]]])])
+
     
     stages {
 
