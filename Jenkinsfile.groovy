@@ -5,8 +5,8 @@ node () {
     stage ("CHECKOUT") {
         // sh "pwd"
         sh "rm -rf spring-boot-mustang/"
-        // sh "git clone https://github.com/hbkmustang/spring-boot-mustang"
-        checkout scm
+        sh "git clone https://github.com/hbkmustang/spring-boot-mustang"
+        // checkout scm
     }
 	
     stage ("BUILD") {
@@ -31,8 +31,8 @@ node () {
 
         // } 
         // Run the maven build
-        // sh "mvn clean install -f spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/" 
-        sh "mvn clean install -f spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/" 
+        sh "mvn clean install -f spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/" 
+        // sh "mvn clean install -f spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/" 
 
     }
     
