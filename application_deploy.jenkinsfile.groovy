@@ -10,7 +10,12 @@ properties([
             script: [
                 $class: 'GroovyScript', 
                 fallbackScript: '', 
-                script: '''println "/usr/local/GraduationWork/select-version/select-artifact-version.sh".execute().text'''
+                script: '''def sout = new StringBuilder(), serr = new StringBuilder()
+                           def proc = '/usr/local/GraduationWork/select-version/select-artifact-version.sh'.execute()
+                           proc.consumeProcessOutput(sout, serr)
+                           proc.waitForOrKill(1000)
+                           println "out> $sout err> $serr"
+                           '''
             ]
         ]
     ])
