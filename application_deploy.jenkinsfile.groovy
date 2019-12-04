@@ -62,8 +62,10 @@ pipeline {
 //    }
 
     stage ("ENVIRONMENT VARS") {
-        echo "${env.Artifact_Version}"
-        echo "${env.Image_Version}"
+        steps {
+            echo "${env.Artifact_Version}"
+            echo "${env.Image_Version}"
+        }
     }
 
 
