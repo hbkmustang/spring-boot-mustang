@@ -12,32 +12,8 @@ var_arim= "${process.in.text}" .eachLine { line ->
     var_arim << line
 }''']]]])])
 
-// properties([
-//    parameters([
-//        [
-//            $class: 'ChoiceParameter', 
-//            choiceType: 'PT_SINGLE_SELECT', 
-//            description: '', 
-//            filterable: false, 
-//            name: 'Artifact_Version', 
-//            randomName: 'choice-parameter-21337077649621572', 
-//            script: [
-//                $class: 'GroovyScript', 
-//                fallbackScript: '', 
-//                script: '''def command = "/usr/local/GraduationWork/select-version/select-artifact-version.sh"
-//                         def process = command.execute ( )
-//                         process.waitFor() 
-//                         def var_arim = [ ]
-//                         var_arim = "${process.in.text}" .eachLine { line ->
-//                         var_arim << line
-//}'''
-//            ]
-//        ]
-//    ])
-//])
-
 pipeline {
-    agent any
+    agent no
 //    parameters {
 //        choice(
 //            name: 'Versions',
@@ -68,55 +44,60 @@ pipeline {
 //           }
 //        }
 //    }
-//
-//    parameters {
-//        activeChoiceParam('Artifact_Version') {
-//            description('Allows user choose Artifact version')
-//            filterable()
-//            choiceType('SINGLE_SELECT')
-//            groovyScript {
-//                script('filecontent')
-//                fallbackScript('"fallback choice"')
-//            }
-//        }
-//        activeChoiceParam('Image_Version') {
-//            description('Allows user choose Image version')
-//            filterable()
-//            choiceType('SINGLE_SELECT')
-//            groovyScript {
-//                script('filecontent2')
-//                fallbackScript('"fallback choice"')
-//            }
-//        }
-//    }
 
-    stage ("ENVIRONMENT VARS") {
-        steps {
-            echo "${env.Artifact_Version}"
-            echo "${env.Image_Version}"
+        stage ("CHOOSE VERSIONS") {
+            agent any
+            steps {
+                echo "${env.Artifact_Version}"
+                echo "${env.Image_Version}"
+            }
         }
-    }
 
 
-//    stages ("DEPLOY") {
-//        stage ("") {
-//        // build 'ci-Instance/deploy'
-//        // build 'ci-Instance/deploy_in_docker'
-//
-//        // build 'qa-Instance/deploy'
-//        // build 'qa-Instance/deploy_in_docker'
-//
-//        // build 'docker-Instance/deploy_in_docker_repo'
-//        
-//        parallel CI_Branch: {
-//            stage ("CI_Deploy") {
-//                build job:'ci-Instance/deploy', parameters: [string(name: 'ArtifactVersion', value: )]
-//            }
-//        }, Docker_Branch: {
-//            stage ("Docker_Deploy") {
-//                build job: 'docker-Instance/deploy_in_docker_repo', parameters: [string(name: 'ImageVersion', value: userInputImage)]
-//            }
-//        }, failFast: true
-    }
+#         stage ("DEPLOY") {
+#             agent any        
+#             steps {
+#                 build 'docker-Instance/deploy_in_docker_repo'
+# 
+#             parallel (
+#                     "ci-Instance" : {
+#                         build("ci-Instance/deploy", parameters: [string(name: "Artifact_Version", value: "${env.Artifact_Version}")])
+#                         build("ci-Instance/deploy_in_docker_repo", parameters: [string(name: "Image_Version", value: "${env.Image_Version}")])
+#                     },
+#                     "docker-Instance" : {
+#                         build("docker-Instance/deploy", parameters: [string(name: "Artifact_Version", value: "${env.Artifact_Version}")])
+#                         build("docker-Instance/deploy_in_docker_repo", parameters: [string(name: "Image_Version", value: "${env.Image_Version}")])
+#                     }
+#             }, failFast: true
+#         }
+        
+        stage {
+            agent no
+            // timeout(time: 3, unit: "MINUTES") {
+            //    input message: 'Do you want to approve the deploy in production (only for admin user)?', ok: 'Yes'
+            //    submitter "admin"
+            // } 
+            try {
+                timeout(time: 30, unit: 'SECONDS') {
+                    input message: 'Do you want to approve the deploy in production (only for admin user)?', ok: 'Yes'
+                    submitter "admin"
+                }
+            } catch(err) {
+                  def user = err.getCauses()[0].getUser()
+                  if (user.toString == 'SYSTEM') {  // if it's system it's a timeout
+                      didTimeout = true
+                      echo "Build timed out at approval step"
+                  } else if (userInput == false) {  // if not and input is false it's the user
+                      echo "Build aborted by: [${user}]"
+                  }
+            }
+        }
+
+        stage {
+            agent any
+            build('qa-Instance/deploy', parameters: [string(name: "Artifact_Version", value: "${env.Artifact_Version}")])
+            // build('qa-Instance/deploy_in_docker_repo', parameters: [string(name: "Artifact_Version", value: "${env.Artifact_Version}")])
+        }
+
 
 }
