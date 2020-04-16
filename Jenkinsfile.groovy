@@ -1,5 +1,6 @@
 node () {
 
+
     stage ("CHECKOUT") {
         // sh "pwd"
         sh "rm -rf spring-boot-mustang/"
