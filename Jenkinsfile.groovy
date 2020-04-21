@@ -31,6 +31,8 @@ node () {
         // } 
         // Run the maven build
         sh "mvn clean install -f spring-boot-mustang/spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/" 
+
+
         // sh "mvn clean install -f spring-boot-tests/spring-boot-smoke-tests/spring-boot-smoke-test-web-ui/" 
 
     }
